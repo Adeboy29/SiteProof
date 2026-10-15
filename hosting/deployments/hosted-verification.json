@@ -1,0 +1,43 @@
+{
+  "website": "https://siteproof-adeboy29.fasure333.chatgpt.site",
+  "id": "4f67d985-68d5-481a-a3b8-cfc2c5869f44",
+  "title": "Foundation concrete — Block A",
+  "hash": "0x79a79d8f1f5232ab915ae0a35cf704e4dd05d224c793907b75834430ae209743",
+  "contract": "0x6dC15c69e92BE6D5a657510aE790070354276C4E",
+  "network": "studionet",
+  "manifestHash": "34b3f0882c7dab6067f38cbea8ebb626107c319e36a21152f1e17c2b2d177357",
+  "createdAt": "2026-10-15T08:17:51.341Z",
+  "state": "finalized",
+  "protocolStatus": "FINALIZED",
+  "report": {
+    "milestone_id": "4f67d985-68d5-481a-a3b8-cfc2c5869f44",
+    "criteria_version": 1,
+    "outcome": "Requirements partially satisfied",
+    "findings": [
+      {
+        "criterion": "Concrete must reach a minimum compressive strength of 25 MPa at 28 days.",
+        "status": "not_satisfied",
+        "evidence": [
+          "evidence-1",
+          "inspection-1"
+        ],
+        "explanation": "The supplied evidence description attributes a lab report result of 22 MPa at 28 days for sample BA-F01, and the attributed inspection notes corroborate that recorded strength. This is below the required 25 MPa. The contractor's 27 MPa claim is unsupported by a sample reference or signed test report and does not override the sample-linked reported result."
+      },
+      {
+        "criterion": "The test report must identify Block A foundation samples.",
+        "status": "satisfied",
+        "evidence": [
+          "evidence-1",
+          "inspection-1"
+        ],
+        "explanation": "The supplied evidence description states that sample BA-F01 is identified as Block A foundation, and the attributed inspection notes also state that BA-F01 is listed as Block A foundation. This satisfies the document-identification criterion based on the supplied text."
+      }
+    ],
+    "missing": [],
+    "uncertainty": "Evidence consists of unverified descriptions and attributed notes rather than authenticated original documents or independently verified inspection records. However, the attributed lab result and attributed inspection notes consistently indicate 22 MPa for the identified Block A sample, which is below the required minimum.",
+    "human_inspection": true,
+    "summary": "One criterion is satisfied because the supplied text identifies sample BA-F01 as Block A foundation. The strength criterion is not satisfied because the attributed lab result is 22 MPa at 28 days, below the required 25 MPa. Overall, the milestone requirements are not satisfied, and independent engineering or human inspection remains appropriate due to unverified authenticity."
+  },
+  "verifiedAt": "2026-10-15T08:22:25.774Z",
+  "verification": "Submitted through the public browser form; server verified finalized on-chain report, original criteria, citations and manifest hash."
+}

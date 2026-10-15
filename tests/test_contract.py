@@ -13,7 +13,11 @@ def test_assessment_authorization_validation_consensus_and_immutability(direct_v
         c.assess('request-1',json.dumps(manifest))
     assert direct_vm.run_validator() is True
     direct_vm.clear_mocks()
-    conflicting_report = dict(report, outcome='Human inspection required')
+    paraphrased_report = dict(report, outcome='Human inspection required', missing=['Provide an independently attributed strength report'], summary='More evidence is needed')
+    direct_vm.mock_llm(r'(?s).*', json.dumps(paraphrased_report))
+    assert direct_vm.run_validator() is True
+    direct_vm.clear_mocks()
+    conflicting_report = dict(report, findings=[dict(report['findings'][0], status='not_satisfied')])
     direct_vm.mock_llm(r'(?s).*', json.dumps(conflicting_report))
     assert direct_vm.run_validator() is False
     assert json.loads(c.get_assessment('request-1')) == report
@@ -26,7 +30,14 @@ def test_assessment_authorization_validation_consensus_and_immutability(direct_v
     with direct_vm.expect_revert('Invalid content hash'):
         c.assess('request-4',json.dumps(bad_manifest))
     direct_vm.clear_mocks()
-    invalid_report = dict(report,outcome='Requirements satisfied')
+    invalid_report = dict(report,findings=[dict(report['findings'][0],status='satisfied',evidence=['invented-reference'])])
     direct_vm.mock_llm(r'(?s).*',json.dumps(invalid_report))
-    with direct_vm.expect_revert('Uncertainty must be escalated'):
+    with direct_vm.expect_revert('Invalid supporting references'):
         c.assess('request-5',json.dumps(manifest))
+    direct_vm.clear_mocks()
+    misleading_heading = dict(report, outcome='Requirements satisfied', human_inspection=False)
+    direct_vm.mock_llm(r'(?s).*', json.dumps(misleading_heading))
+    c.assess('request-6',json.dumps(manifest))
+    normalized = json.loads(c.get_assessment('request-6'))
+    assert normalized['outcome'] == 'Insufficient evidence'
+    assert normalized['human_inspection'] is True

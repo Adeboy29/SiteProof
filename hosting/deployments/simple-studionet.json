@@ -1,0 +1,12 @@
+{
+  "network": "studionet",
+  "sdk": "1.1.8",
+  "signer": "0x7eA6A55EE15a672C9613ACCc292e3f37a6A144Cb",
+  "sourceHash": "cff38eabcacbc5d37716f9ec2b21b69ca2d338008a09ff4c6c88819fdd1aa9a4",
+  "hash": "0x8cf180db69d1818d9977f9690c39e9de3bdf68d634b3e40476759c071e307151",
+  "submittedAt": "2026-10-15T08:09:50.728Z",
+  "status": "FINALIZED",
+  "execution": "SUCCESS",
+  "contractAddress": "0x6dC15c69e92BE6D5a657510aE790070354276C4E",
+  "verifiedAt": "2026-10-15T08:10:27.273Z"
+}

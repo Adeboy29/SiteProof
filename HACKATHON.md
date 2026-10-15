@@ -1,51 +1,42 @@
 # SiteProof hackathon demo
 
-SiteProof reviews construction milestone evidence through a GenLayer Intelligent Contract. The submission is deliberately small: one page, one evidence manifest, one actual contract transaction, one traceable assessment.
+**Website:** [https://siteproof-adeboy29.fasure333.chatgpt.site](https://siteproof-adeboy29.fasure333.chatgpt.site)
 
-## Demonstration
+**Source:** [Adeboy29/SiteProof](https://github.com/Adeboy29/SiteProof)
 
-1. Run the site as described in README.md.
-2. Click Load example. This supplies clearly marked synthetic concrete-test evidence.
-3. Review the criteria and evidence; approve public submission.
-4. Click Run Intelligent Contract. Show the actual transaction hash and consensus status.
-5. After finalization, show criterion findings, uncertainty and the on-chain evidence hash. Download the assessment JSON.
+SiteProof assesses construction milestone evidence through a real GenLayer Intelligent Contract. The public app has one page: enter a milestone, acceptance criteria and evidence, execute the contract, then view the finalized assessment and transaction record.
 
-A finding that evidence is insufficient or a requirement is not satisfied is a valid result, not a failed application transaction.
+## Reproduce the public demonstration
 
-## Confirmed live proof (2026-10-13)
+1. Open the public website. If a previous assessment is displayed, click Start another assessment.
+2. Click Load example and review the synthetic concrete-test evidence and inspector notes.
+3. Approve public submission and click Run Intelligent Contract.
+4. Wait for actual finalization. The example reports 22 MPa against a 25 MPa requirement, while identifying the required Block A sample.
+5. Review criterion findings, the transaction and evidence fingerprint. Download assessment JSON.
 
-Network: stable GenLayer Studionet / hosted Studio, chain ID 61999.
+## Verified public execution — 15 October 2026
 
-Official SDK: genlayer-js 1.1.8, installed as genlayer-js-stable.
+- Network: GenLayer stable Studionet / hosted Studio, chain ID 61999.
+- SDK: official genlayer-js 1.1.8, installed as genlayer-js-stable.
+- Active contract: `0x6dC15c69e92BE6D5a657510aE790070354276C4E`
+- Contract source SHA-256: `cff38eabcacbc5d37716f9ec2b21b69ca2d338008a09ff4c6c88819fdd1aa9a4`
+- Deployment transaction: `0x8cf180db69d1818d9977f9690c39e9de3bdf68d634b3e40476759c071e307151`
+- Assessment request: `4f67d985-68d5-481a-a3b8-cfc2c5869f44`
+- Assessment transaction: `0x79a79d8f1f5232ab915ae0a35cf704e4dd05d224c793907b75834430ae209743`
+- Manifest SHA-256: `34b3f0882c7dab6067f38cbea8ebb626107c319e36a21152f1e17c2b2d177357`
+- State: FINALIZED with successful execution and validator agreement.
+- Outcome: Requirements partially satisfied.
 
-Contract source: contracts/siteproof.py
-
-Contract SHA-256: 2acc014c4cbcccf02c06f5380729412d4734352533918d0028fbd14b2b9c0ecb
-
-Deployment transaction: 0xfeb7603299bafdf663e3e31fbac35f092ecab21a8648564c02a86c1151ec5a01
-
-Contract address: 0x466c24Cb78e63B1eA3EA6a0B81CF1CcDaE7A2581
-
-Assessment request: a48d7fe0-69fa-4c61-8e12-da863ab48d1d
-
-Assessment transaction: 0xc0a68b11270dbfb8b30ee00a4022e02177894aa175c9c99fc0965ce16fc2a39a
-
-Manifest hash: 01c8b19d7b26abab332510a4f739ef321fcdc2e195261b8a123bb5170694db40
-
-Final state: FINALIZED / successful execution / MAJORITY_AGREE.
-
-Returned outcome: Requirements not satisfied. The contract identified reported strength of 22 MPa against the 25 MPa criterion and cited evidence-1 and inspection-1.
-
-The test called the website POST and GET assessment APIs, waited for real network finalization, read the report and hash back from the contract, and verified them against the original submission. Full public fixture and report: deployments/simple-verification.json. Deployment journal: deployments/simple-studionet.json. Inspect these records in [GenLayer Studio](https://studio.genlayer.com).
+The test submitted the built-in example through the public browser form. The hosted API read the finalized report and anchored manifest hash from GenLayer and checked report identity, original criteria and citations. Full result: [hosting/deployments/hosted-verification.json](hosting/deployments/hosted-verification.json). The website also preserved an earlier request across a hosting redeployment.
 
 ## Intelligent Contract execution
 
-The assess write method invokes gl.nondet.exec_prompt. The leader proposes a structured report. Validators independently evaluate evidence through gl.vm.run_nondet_unsafe and compare stable decision fields. Deterministic checks constrain report identity, ordered criteria, allowed outcomes and citations. The contract stores immutable reports and exact manifest SHA-256 hashes. The web server signs and tracks transactions; it does not generate assessments itself.
+The assess write method invokes gl.nondet.exec_prompt. Validators independently repeat the assessment through gl.vm.run_nondet_unsafe and compare ordered criterion decisions. The overall outcome is derived deterministically from those decisions. Missing-evidence prose, explanations and valid citation choices can vary without causing false disagreement. Deterministic checks enforce identity, original criteria, allowed statuses and supplied citation IDs. Any insufficient criterion forces an insufficient-evidence outcome and human-inspection flag. Reports and exact manifest hashes are immutable per request.
 
-## Scope and limits
+The hosted application source is in hosting/. It uses Vinext, Cloudflare Workers, persistent D1 storage and protected server secrets. Transaction reservations and the 10-submissions/hour cap are enforced transactionally across Worker instances. Ambiguous broadcasts are not retried automatically. The root Next.js application remains the local version.
 
-This verifies hosted Studio execution, not Bradbury deployment. Studio can reset. The site currently runs locally; uploading code to GitHub does not host its server. A hosted demo needs one persistent Node server and server-side configuration.
+## Scope
 
-Evidence is text and optional user-attributed inspection notes. Inspector identity, source authenticity and physical completion are not independently verified. No payment transfer occurs. Verification evidence in this repo is synthetic and public. Never commit .env.local or a private key.
+This verifies real hosted Studio execution, not Bradbury deployment. Studio can reset. Evidence is submitted text and user-attributed inspection notes; authenticity, inspector identity and physical completion are not independently certified. No payment transfer occurs. Verification evidence is synthetic and public. Private keys and local environment files are excluded from source control.
 
-Hackathon eligibility and any requirement for a particular public testnet have not been confirmed because no event rules or URL were supplied.
+Hackathon eligibility and any requirement for a particular testnet have not been confirmed because no event rules were supplied. The earlier local execution record is retained in deployments/simple-verification.json as historical evidence against its recorded earlier contract.

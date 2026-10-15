@@ -1,5 +1,9 @@
 # SiteProof
 
+**Public website:** [Open SiteProof](https://siteproof-adeboy29.fasure333.chatgpt.site)
+
+The deployed application source is in [`hosting/`](hosting/README.md). It uses Cloudflare Workers and D1 for persistent transaction records. The root project remains the local Next.js version.
+
 A simple construction milestone assessment website powered by a real GenLayer Intelligent Contract.
 
 Enter a milestone, acceptance criteria and evidence text. The Python contract uses GenLayer AI execution and validator consensus to assess each criterion. The website tracks the actual transaction and reads the finalized report and SHA-256 evidence fingerprint from the contract.
@@ -29,18 +33,19 @@ npm start
 
 On this prepared Windows workspace, double-click `outputs/Start-SiteProof.cmd` after building. Keep the terminal open and use the address printed there.
 
-## Verified execution
+## Verified public execution
 
-`deployments/simple-verification.json` records an actual completed synthetic submission, its contract report and matching evidence hash:
+The [public website](https://siteproof-adeboy29.fasure333.chatgpt.site) was tested through its browser form using the built-in synthetic example. The finalized on-chain report identified a failed 25 MPa strength criterion (22 MPa reported) and a satisfied sample-identification criterion. The derived overall outcome was **Requirements partially satisfied**.
 
-- Network: GenLayer **stable Studionet**, chain ID 61999.
-- Contract: `0x466c24Cb78e63B1eA3EA6a0B81CF1CcDaE7A2581`
-- Assessment transaction: `0xc0a68b11270dbfb8b30ee00a4022e02177894aa175c9c99fc0965ce16fc2a39a`
-- Result: **Requirements not satisfied** (22 MPa reported; 25 MPa required).
+- Network: stable GenLayer Studionet, chain ID 61999.
+- Current contract: `0x6dC15c69e92BE6D5a657510aE790070354276C4E`
+- Assessment transaction: `0x79a79d8f1f5232ab915ae0a35cf704e4dd05d224c793907b75834430ae209743`
+- Contract source SHA-256: `cff38eabcacbc5d37716f9ec2b21b69ca2d338008a09ff4c6c88819fdd1aa9a4`
+- Full report and fingerprint: [`hosting/deployments/hosted-verification.json`](hosting/deployments/hosted-verification.json).
 
-Inspect the address and transaction in [GenLayer Studio](https://studio.genlayer.com). This is hosted Studio consensus, not a Bradbury deployment. Studio state can reset. See `HACKATHON.md` for the verification record and demo script.
+The earlier 13 October local execution record remains in `deployments/simple-verification.json` as historical proof against its explicitly recorded earlier contract.
 
-After confirming a Studio reset or intentionally creating a replacement, use `npm run contract:deploy -- --new`. This preserves the old journal and deploys a new contract; restart the website to load its address.
+Inspect transactions in [GenLayer Studio](https://studio.genlayer.com). Studio is a hosted development network, not Bradbury, and can reset. After confirming a reset or intentionally replacing the local contract, use `npm run contract:deploy -- --new`. Update the hosted secret and redeploy to apply a replacement address.
 
 ## How it works
 
