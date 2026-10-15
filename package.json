@@ -1,0 +1,57 @@
+{
+  "name": "siteproof",
+  "version": "1.0.0",
+  "description": "Construction milestone evidence and GenLayer assessment workspace",
+  "scripts": {
+    "dev": "next dev --webpack --hostname 127.0.0.1",
+    "build": "next build --webpack",
+    "start": "next start --hostname 127.0.0.1",
+    "test": "vitest run",
+    "typecheck": "next typegen && tsc --noEmit",
+    "lint": "eslint app lib components tests --max-warnings=0",
+    "doctor": "node scripts/simple-doctor.mjs",
+    "setup:live": "node scripts/simple-deploy.mjs",
+    "genlayer:deploy": "node scripts/genlayer-deploy.mjs",
+    "genlayer:resume-deploy": "node scripts/genlayer-resume-deploy.mjs",
+    "genlayer:verify": "node scripts/genlayer-verify.mjs",
+    "test:live": "node scripts/simple-test-server.mjs",
+    "contract:deploy": "node scripts/simple-deploy.mjs"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@radix-ui/react-slot": "^1.5.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.117.3",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "genlayer-js": "2.0.0-rc.1",
+    "genlayer-js-stable": "npm:genlayer-js@1.1.8",
+    "lucide-react": "^1.56.0",
+    "next": "^16.4.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "server-only": "^0.0.1",
+    "tailwind-merge": "^3.7.0",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@electric-sql/pglite": "^0.5.9",
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/node": "^26.6.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.0",
+    "prettier": "^3.9.10",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^6.0.3",
+    "vitest": "^5.0.4"
+  },
+  "private": true,
+  "engines": {
+    "node": ">=22.18"
+  }
+}

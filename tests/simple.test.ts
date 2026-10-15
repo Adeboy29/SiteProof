@@ -1,0 +1,11 @@
+import {describe,it,expect} from "vitest";
+import {assessmentInput,makeManifest,contentHash,verifySimpleReport} from "../lib/simple-assessment";
+import {studioReceipt} from "../lib/studio-receipt";
+const input={id:"816739af-7907-4c94-87e8-8a64535f040c",title:"Concrete test",criteria:["Strength must reach 25 MPa."],evidence:"Report says 22 MPa at 28 days.",inspector:"",inspection:"",publicConsent:true};
+const report={milestone_id:input.id,criteria_version:1,outcome:"Insufficient evidence",findings:[{criterion:input.criteria[0],status:"insufficient",evidence:["evidence-1"],explanation:"Independent inspection needed."}],missing:["Inspection"],uncertainty:"Unverified text",human_inspection:true,summary:"Inspect the concrete."};
+describe("simple contract flow",()=>{
+ it("requires consent and attributed inspection notes",()=>{expect(assessmentInput.safeParse({...input,publicConsent:false}).success).toBe(false);expect(assessmentInput.safeParse({...input,inspection:"Checked"}).success).toBe(false);});
+ it("hashes the exact submitted text",()=>{const m=makeManifest(assessmentInput.parse(input));expect(m.evidence[0].hash).toBe(contentHash(input.evidence));expect(m.evidence[0].hash).not.toBe(contentHash(input.evidence+" "));});
+ it("accepts only an anchored report matching the original criteria and citations",()=>{const m=makeManifest(assessmentInput.parse(input)),hash=contentHash(JSON.stringify(m));expect(verifySimpleReport(report,m,hash).summary).toBe(report.summary);expect(()=>verifySimpleReport(report,m,"bad")).toThrow();expect(()=>verifySimpleReport({...report,milestone_id:"different"},m,hash)).toThrow();expect(()=>verifySimpleReport({...report,findings:[{...report.findings[0],evidence:["unknown"]}]},m,hash)).toThrow();});
+ it("requires finalization and a successful execution receipt",()=>{expect(studioReceipt({statusName:"ACCEPTED",consensus_data:{leader_receipt:[{execution_result:"SUCCESS"}]}}).successful).toBe(false);expect(studioReceipt({statusName:"FINALIZED",result_name:"MAJORITY_AGREE",consensus_data:{leader_receipt:[{execution_result:"SUCCESS"}]}}).successful).toBe(true);expect(studioReceipt({statusName:"FINALIZED",consensus_data:{leader_receipt:[{execution_result:"ERROR"}]}}).successful).toBe(false);});
+});

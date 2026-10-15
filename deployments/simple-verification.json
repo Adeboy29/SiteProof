@@ -1,0 +1,43 @@
+{
+  "id": "a48d7fe0-69fa-4c61-8e12-da863ab48d1d",
+  "title": "Synthetic hackathon test: Block A concrete",
+  "hash": "0xc0a68b11270dbfb8b30ee00a4022e02177894aa175c9c99fc0965ce16fc2a39a",
+  "contract": "0x466c24Cb78e63B1eA3EA6a0B81CF1CcDaE7A2581",
+  "network": "studionet",
+  "manifestHash": "01c8b19d7b26abab332510a4f739ef321fcdc2e195261b8a123bb5170694db40",
+  "createdAt": "2026-10-13T15:34:53.668Z",
+  "state": "finalized",
+  "protocolStatus": "FINALIZED",
+  "report": {
+    "milestone_id": "a48d7fe0-69fa-4c61-8e12-da863ab48d1d",
+    "criteria_version": 1,
+    "outcome": "Requirements not satisfied",
+    "findings": [
+      {
+        "criterion": "Concrete must reach 25 MPa at 28 days.",
+        "status": "not_satisfied",
+        "evidence": [
+          "evidence-1",
+          "inspection-1"
+        ],
+        "explanation": "Both the submitted lab report (evidence-1) and the attributed inspection notes (inspection-1) consistently report the concrete strength as 22 MPa at 28 days, which is below the required 25 MPa."
+      }
+    ],
+    "missing": [],
+    "uncertainty": "No uncertainty regarding the reported strength value, as evidence and inspection notes align. However, the authenticity and independence of the data sources are not verified.",
+    "human_inspection": false,
+    "summary": "The sole criterion is not satisfied. Reported concrete strength (22 MPa) is below the required 25 MPa at 28 days, based on consistent but unverified evidence."
+  },
+  "verifiedAt": "2026-10-13T15:38:18.540Z",
+  "fixture": {
+    "id": "a48d7fe0-69fa-4c61-8e12-da863ab48d1d",
+    "title": "Synthetic hackathon test: Block A concrete",
+    "criteria": [
+      "Concrete must reach 25 MPa at 28 days."
+    ],
+    "evidence": "SYNTHETIC TEST DATA. Lab report LAB-014: sample BA-F01, Block A foundation, strength 22 MPa at 28 days. The claimed milestone cannot be accepted at 25 MPa.",
+    "inspector": "Synthetic demo inspector",
+    "inspection": "SYNTHETIC NOTES. I checked LAB-014. BA-F01 is identified as Block A foundation. Its strength is 22 MPa at 28 days, below the required 25 MPa. An engineering review is necessary.",
+    "publicConsent": true
+  }
+}

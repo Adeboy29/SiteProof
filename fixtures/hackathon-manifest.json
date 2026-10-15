@@ -1,0 +1,8 @@
+{
+ "milestone_id":"siteproof-public-demo-foundation",
+ "criteria_version":1,
+ "criteria":["An attributed inspection and laboratory test report establish a concrete compressive strength of at least 25 MPa."],
+ "evidence":[{"id":"demo-lab-summary","hash":"ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad","description":"Synthetic hackathon fixture: a laboratory report summary states 22 MPa. This is not a real construction record.","source":"synthetic reviewer test fixture"}],
+ "inspections":[{"id":"demo-inspector-note","notes":"Synthetic attributed inspection: a second report states 27 MPa for a sample whose relation to the milestone cannot be established. Independent testing is required.","source":"synthetic reviewer test fixture"}],
+ "preparation":"Public synthetic evidence only. Conflicting values should lead to uncertainty and human inspection."
+}
